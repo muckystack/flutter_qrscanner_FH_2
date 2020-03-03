@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+
+import 'package:barcode_scan/barcode_scan.dart';
+
 import 'package:qrreaderappfh/src/pages/direcciones_pages.dart';
 import 'package:qrreaderappfh/src/pages/mapas_page.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({Key key}) : super(key: key);
@@ -16,9 +20,45 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('QRScanner'),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.delete_forever),
+            onPressed: () {}
+          )
+        ],
+      ),
       body: _callPage(currentIndex), // Metodo para cargar la página que se quiere
       bottomNavigationBar: _crearBottomNavigationBar(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.filter_center_focus),
+          onPressed: _scanQR,
+          backgroundColor: Theme.of(context).primaryColor,
+      ),
     );
+  }
+
+  _scanQR() async {
+
+    // http://170.239.150.178:90/#/login
+    // geo:21.0178536078798,-101.25684156855472
+
+    String futureString = '';
+
+    // try {
+    //   futureString = await BarcodeScanner.scan();
+    // } catch (e) {
+    //   futureString = e.toString();
+    // }
+
+    // print('Future string: $futureString');
+
+    // if(futureString != null) {
+    //   print('Tenemos información');
+    // }
+
   }
 
   Widget _callPage(int paginaActual) {
@@ -27,6 +67,7 @@ class _HomePageState extends State<HomePage> {
     switch (paginaActual) {
       case 0: return MapasPage();
       case 1: return DireccionesPage();
+      default: return MapasPage();
     }
 
   }
