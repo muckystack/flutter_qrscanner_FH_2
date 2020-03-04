@@ -4,6 +4,7 @@ import 'package:barcode_scan/barcode_scan.dart';
 
 import 'package:qrreaderappfh/src/pages/direcciones_pages.dart';
 import 'package:qrreaderappfh/src/pages/mapas_page.dart';
+import 'package:qrreaderappfh/src/providers/db_provider.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -45,7 +46,7 @@ class _HomePageState extends State<HomePage> {
     // http://170.239.150.178:90/#/login
     // geo:21.0178536078798,-101.25684156855472
 
-    String futureString = '';
+    String futureString = 'http://170.239.150.178:90/#/login';
 
     // try {
     //   futureString = await BarcodeScanner.scan();
@@ -55,9 +56,11 @@ class _HomePageState extends State<HomePage> {
 
     // print('Future string: $futureString');
 
-    // if(futureString != null) {
-    //   print('Tenemos información');
-    // }
+    if(futureString != null) {
+      //  print('Tenemos información');
+       final scan = ScanModel(valor: futureString);
+       DBProvider.db.nuevoScan(scan);
+    }
 
   }
 
