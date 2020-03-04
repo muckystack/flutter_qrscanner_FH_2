@@ -28,7 +28,7 @@ class MapaPage extends StatelessWidget {
     return FlutterMap(
       options: MapOptions(
         center: scan.getLatLng(),
-        zoom: 10
+        zoom: 15
       ),
       layers: [
         _crearMapa(),
@@ -44,7 +44,8 @@ class MapaPage extends StatelessWidget {
       '{id}/{z}/{x}/{y}@2x.png?access_token={accessToken}',
       additionalOptions: {
         'accessToken': 'pk.eyJ1IjoibXVja3lzdGFjayIsImEiOiJjazU0eGhidHcwMHZ3M2xzN2w0eXdsdmJkIn0.MvGNRnHmgDF5syHT5Wra7w',
-        'id': 'mapbox.streets'
+        'id': 'mapbox.dark'
+        // streets, dark, light, outdoors, satellite
       }
     );
 
