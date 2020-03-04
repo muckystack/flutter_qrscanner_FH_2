@@ -12,6 +12,7 @@ class ScansBloc {
 
   ScansBloc._internal() {
     // Obtener Scans de la Base de datos
+    obtenerScans();
   }
 
   // Se pone el .broadcast() por que se va ha estar utilizando en varios ligares
@@ -22,6 +23,32 @@ class ScansBloc {
   dispose() {
     // El ? es una validación por si no existe ningun objeto
     _scansController?.close();
+  }
+
+
+
+
+  obtenerScans() async {
+
+    _scansController.sink.add(await DBProvider.db.getTodosScans());
+
+  }
+  
+  agregarScan(ScanModel scan) async {
+    await DBProvider.db.nuevoScan(scan);
+    obtenerScans();
+  }
+
+  borrarScan(int id) async {
+
+    await DBProvider.db.deleteScan(id);
+    obtenerScans();
+
+  }
+
+  borrarScanTODOS() async {
+    await DBProvider.db.deleteAll();
+    obtenerScans();
   }
 
 }
