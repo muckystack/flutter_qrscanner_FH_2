@@ -1,8 +1,9 @@
 import 'dart:async';
 
+import 'package:qrreaderappfh/src/bloc/validator.dart';
 import 'package:qrreaderappfh/src/providers/db_provider.dart';
 
-class ScansBloc {
+class ScansBloc with Validators {
   
   static final ScansBloc _singleton = new ScansBloc._internal();
 
@@ -18,7 +19,8 @@ class ScansBloc {
   // Se pone el .broadcast() por que se va ha estar utilizando en varios ligares
   final _scansController = StreamController<List<ScanModel>>.broadcast();
 
-  Stream<List<ScanModel>> get scansStream => _scansController.stream;
+  Stream<List<ScanModel>> get scansStream => _scansController.stream.transform(validarGeo);
+  Stream<List<ScanModel>> get scansStreamHttp => _scansController.stream.transform(validarHttp);
 
   dispose() {
     // El ? es una validación por si no existe ningun objeto

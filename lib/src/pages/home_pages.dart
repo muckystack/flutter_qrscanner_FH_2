@@ -53,11 +53,11 @@ class _HomePageState extends State<HomePage> {
 
     String futureString = 'http://170.239.150.178:90/#/login';
 
-    // try {
-    //   futureString = await BarcodeScanner.scan();
-    // } catch (e) {
-    //   futureString = e.toString();
-    // }
+    try {
+      futureString = await BarcodeScanner.scan();
+    } catch (e) {
+      futureString = e.toString();
+    }
 
     // print('Future string: $futureString');
 
